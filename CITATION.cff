@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use AUREO-ML, please cite it as below."
+title: "AUREO-ML: Auriferous Exploration and Mineral Characterization with Machine Learning"
+version: "0.1.0"
+date-released: "2026-05-01"
+authors:
+  - family-names: "Pulido Sastoque"
+    given-names: "Diego F."
+    email: "dfpulidos@unal.edu.co"
+keywords:
+  - gold exploration
+  - geochemistry
+  - machine learning
+  - spatial cross-validation
+license: MIT
+repository-code: "https://github.com/dfpulidos/aureo-ml"
