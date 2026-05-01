@@ -148,6 +148,21 @@ reports/figures/dashboard_screenshot.png
 
 The app can generate demo data on the fly, so a reviewer can run it without downloading external datasets.
 
+### Public Streamlit Cloud Deployment
+
+Use these settings in Streamlit Cloud:
+
+```text
+Repository: geodiegodrone/aureo-ml
+Branch: main
+Main file path: app/streamlit_app.py
+Python: 3.11
+```
+
+Detailed deployment checklist: [`docs/streamlit_cloud_deployment.md`](docs/streamlit_cloud_deployment.md)
+
+Paper-style technical report: [`docs/paper.md`](docs/paper.md)
+
 ## External Data Sources
 
 The repository is prepared for:
