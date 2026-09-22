@@ -37,6 +37,7 @@ This repository is designed as a scientific portfolio project at the intersectio
 - Supervised classification for prospective versus non-prospective zones.
 - Au grade regression scaffold for g/t prediction.
 - MLflow experiment tracking.
+- MLflow runs for classification, regression, and stacking with validation metrics and logged sklearn model artifacts.
 - SHAP-ready explainability workflow.
 - Multi-page Streamlit dashboard with folium maps and live prediction.
 
