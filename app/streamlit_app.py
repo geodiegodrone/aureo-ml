@@ -19,7 +19,7 @@ if str(SRC) not in sys.path:
 from aureo_ml.config import ELEMENTS
 from aureo_ml.data.synthetic_generator import AntioquiaGeochemicalGenerator
 from aureo_ml.features.geochemical_indices import add_geochemical_indices
-from aureo_ml.models.classifier import build_classifier
+from aureo_ml.models.classifier import train_classifier
 from aureo_ml.visualization.geospatial_maps import prospectivity_map
 
 
@@ -35,16 +35,13 @@ def load_demo_data(n_samples: int = 2500) -> pd.DataFrame:
 
 @st.cache_resource(show_spinner=False)
 def train_demo_model(df: pd.DataFrame):
-    """Train lightweight demo classifier."""
+    """Train and track the lightweight demo classifier."""
 
-    features = ELEMENTS + ["depth_m", "alteration_intensity", "structural_score", "lithology"]
-    model = build_classifier(random_state=42)
-    model.fit(df[features], df["prospective"])
-    return model
+    return train_classifier(df, random_state=42, run_name="streamlit-demo-prospectivity")
 
 
 df = load_demo_data()
-model = train_demo_model(df)
+model, model_metrics = train_demo_model(df)
 
 st.title("AUREO-ML")
 st.caption("Auriferous Exploration & Mineral Characterization with Machine Learning")
@@ -53,6 +50,7 @@ left, middle, right = st.columns(3)
 left.metric("Samples", f"{len(df):,}")
 middle.metric("High potential", f"{(df['potential_class'] == 'high').mean():.1%}")
 right.metric("Median Au", f"{df['Au'].median():.3f} g/t")
+st.caption(f"MLflow holdout ROC AUC: {model_metrics['roc_auc']:.3f}")
 
 with st.sidebar:
     st.header("Filters")

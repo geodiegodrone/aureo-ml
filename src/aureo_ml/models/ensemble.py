@@ -58,7 +58,9 @@ def train_stacking(input_path: str | Path, output_path: str | Path) -> dict[str,
         proba = model.predict_proba(x_test)[:, 1]
         auc = float(roc_auc_score(y_test, proba))
         mlflow.log_metric("auc", auc)
+        mlflow.log_params({"random_state": cfg.random_seed, "test_size": 0.25, "train_rows": len(x_train), "test_rows": len(x_test)})
         mlflow.log_param("model", "stacking_rf_gradient_boosting")
+        mlflow.sklearn.log_model(model, artifact_path="model", input_example=x_train.head(3))
         out = Path(output_path)
         out.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(model, out)
